@@ -1,0 +1,88 @@
+<html>
+  <head>
+    <title>Image Browser</title>
+    <script type="text/javascript" src="http://yui.yahooapis.com/combo?2.8.0r4/build/yahoo-dom-event/yahoo-dom-event.js&2.8.0r4/build/container/container_core-min.js&2.8.0r4/build/menu/menu-min.js&2.8.0r4/build/element/element-min.js&2.8.0r4/build/button/button-min.js&2.8.0r4/build/editor/editor-min.js"></script>
+    <style type="text/css">
+      body {
+        font-family: 'Lucida Grande', 'Bitstream Vera Sans', Helvetica, Verdana, Arial, sans-serif;
+        font-size: 95%;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+      th {
+        border-bottom: 2px solid gray;
+        padding: 0 1em;
+      }
+      td {
+        padding: 0.3em;
+      }
+      td.thumbnail {
+        text-align: center;
+      }
+      tr.alt td {
+        background-color: #ddd;
+      }
+      img {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      <strong>Click an image to insert it into your document:</strong>
+    </p>
+    <table id="images">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Thumbnail</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @assets.each do |asset| %>
+          <tr<%= cycle("", " class='alt' ") %>>
+            <td><%=h asset.title %></td>
+            <td class="thumbnail"><img src="<%= asset.thumbnail('thumbnail') %>" onclick="choose('<%= asset.thumbnail('original') %>');" /></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <script type="text/javascript">
+      function choose(src) {
+        editor = window.opener.YAHOO.widget.EditorInfo.getEditorById('part_body_content');
+        editor._focusWindow();
+        editor.execCommand('insertimage', src);
+        window.close();
+      }
+      /*
+      (function() {
+        var Dom = YAHOO.util.Dom,
+          Event = YAHOO.util.Event,
+          editor = window.opener.YAHOO.widget.EditorInfo.getEditorById('part_body_content');
+          //Get a reference to the editor on the other page
+
+        //Add a listener to the parent of the images
+        Event.on('images', 'click', function(ev) {
+          var tar = Event.getTarget(ev);
+          //Check to see if we clicked on an image
+          if (tar && tar.tagName && (tar.tagName.toLowerCase() == 'img')) {
+            //Focus the editor's window
+            editor._focusWindow();
+            //Fire the execCommand for insertimage
+            editor.execCommand('insertimage', tar.getAttribute('src', 2));
+            //Close this window
+            window.close();
+          }
+        });
+        //Internet Explorer will throw this window to the back, this brings it to the front on load
+        Event.on(window, 'load', function() {
+            window.focus();
+        });
+      })();
+      */
+    </script>
+  </body>
+</html>

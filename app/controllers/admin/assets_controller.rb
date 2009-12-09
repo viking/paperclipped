@@ -121,4 +121,10 @@ class Admin::AssetsController < Admin::ResourceController
     render :nothing => true
   end
 
+  def browser
+    @assets = Asset.all({
+      :conditions => ["asset_content_type in (?)", %w{image/jpeg}]
+    })
+    render :template => 'admin/assets/browser', :layout => false
+  end
 end

@@ -8,9 +8,8 @@ class PaperclippedExtension < Radiant::Extension
   url "http://github.com/kbingman/paperclipped"
 
   define_routes do |map|
-
     # Main RESTful routes for Assets
-    map.namespace :admin, :member => { :remove => :get }, :collection => { :refresh => :post } do |admin|
+    map.namespace :admin, :member => { :remove => :get }, :collection => { :refresh => :post, :browser => :get } do |admin|
       admin.resources :assets
     end
 
