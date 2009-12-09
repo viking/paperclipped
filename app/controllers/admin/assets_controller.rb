@@ -123,7 +123,8 @@ class Admin::AssetsController < Admin::ResourceController
 
   def browser
     @assets = Asset.all({
-      :conditions => ["asset_content_type in (?)", %w{image/jpeg}]
+      :conditions => ["asset_content_type in (?)", %w[image/png image/x-png image/jpeg image/pjpeg image/jpg image/gif]],
+      :order => "updated_at DESC"
     })
     render :template => 'admin/assets/browser', :layout => false
   end
