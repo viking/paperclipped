@@ -22,8 +22,8 @@ module AssetsAdminUI
               index.preamble.concat %w{header explanation new_button filters}
               #index.assets_container
               index.bottom.concat %w{regenerate}
-              index.thead.concat %w{thumbnail_header title_header content_type_header modify_header}
-              index.tbody.concat %w{thumbnail_cell title_cell content_type_cell remove_cell} # bucket_cell
+              index.thead.concat %w{thumbnail_header title_header link_header content_type_header modify_header}
+              index.tbody.concat %w{thumbnail_cell title_cell link_cell content_type_cell remove_cell} # bucket_cell
               #index.bucket_pane.concat %w{bucket_notes bucket bucket_bottom}
               #index.asset_tabs.concat %w{bucket_tab}
               index.paginate

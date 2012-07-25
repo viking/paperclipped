@@ -6,6 +6,8 @@
           %th.asset Asset
         - thead.title_header do
           %th.asset-title Title
+        - thead.link_header do
+          %th.link Direct Link
         - thead.content_type_header do
           %th.content_type Type
         - thead.modify_header do
@@ -26,6 +28,9 @@
                 &nbsp;
                 %span.caption
                   = asset.caption
+            - tbody.link_cell do
+              %td.link
+                %a{:href => asset.thumbnail('original')} Link
             - tbody.content_type_cell do
               %td.content_type
                 = asset.asset_content_type
